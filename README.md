@@ -15,7 +15,7 @@ A simple Django application demonstrating CRUD (Create, Read, Update, Delete) op
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/django_crud_example.git
+git clone https://github.com/JayaPrakashReddyAlugubelli/django_crud_example.git
 cd django_crud_example
 ```
 

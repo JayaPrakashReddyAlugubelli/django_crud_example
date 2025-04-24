@@ -1,0 +1,144 @@
+{% extends 'tasks/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{% if employee %}Edit Employee{% else %}Register New Employee{% endif %}</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    {% if errors %}
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                {% for field, error in errors.items %}
+                    <li>{{ field }}: {{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <form method="post" class="mt-4">
+        {% csrf_token %}
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label for="full_name" class="form-label">Full Name</label>
+                <input type="text" class="form-control {% if errors.full_name %}is-invalid{% endif %}" 
+                       id="full_name" name="full_name" value="{{ employee.full_name|default:'' }}" required>
+                {% if errors.full_name %}
+                    <div class="invalid-feedback">{{ errors.full_name }}</div>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <label for="date_of_birth" class="form-label">Date of Birth</label>
+                <input type="date" class="form-control {% if errors.date_of_birth %}is-invalid{% endif %}" 
+                       id="date_of_birth" name="date_of_birth" value="{{ employee.date_of_birth|date:'Y-m-d'|default:'' }}" required>
+                {% if errors.date_of_birth %}
+                    <div class="invalid-feedback">{{ errors.date_of_birth }}</div>
+                {% endif %}
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Gender</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="male" value="M" 
+                               {% if employee.gender == 'M' %}checked{% endif %} required>
+                        <label class="form-check-label" for="male">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="female" value="F" 
+                               {% if employee.gender == 'F' %}checked{% endif %} required>
+                        <label class="form-check-label" for="female">Female</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="gender" id="other" value="O" 
+                               {% if employee.gender == 'O' %}checked{% endif %} required>
+                        <label class="form-check-label" for="other">Other</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-3 mt-2">
+            <div class="col-md-6">
+                <label for="phone_number" class="form-label">Phone Number</label>
+                <input type="tel" class="form-control {% if errors.phone_number %}is-invalid{% endif %}" 
+                       id="phone_number" name="phone_number" value="{{ employee.phone_number|default:'' }}" required>
+                {% if errors.phone_number %}
+                    <div class="invalid-feedback">{{ errors.phone_number }}</div>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control {% if errors.email %}is-invalid{% endif %}" 
+                       id="email" name="email" value="{{ employee.email|default:'' }}" required>
+                {% if errors.email %}
+                    <div class="invalid-feedback">{{ errors.email }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row g-3 mt-2">
+            <div class="col-12">
+                <label for="address" class="form-label">Address</label>
+                <textarea class="form-control {% if errors.address %}is-invalid{% endif %}" 
+                          id="address" name="address" rows="2" required>{{ employee.address|default:'' }}</textarea>
+                {% if errors.address %}
+                    <div class="invalid-feedback">{{ errors.address }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row g-3 mt-2">
+            <div class="col-md-4">
+                <label for="job_title" class="form-label">Job Title</label>
+                <input type="text" class="form-control {% if errors.job_title %}is-invalid{% endif %}" 
+                       id="job_title" name="job_title" value="{{ employee.job_title|default:'' }}" required>
+                {% if errors.job_title %}
+                    <div class="invalid-feedback">{{ errors.job_title }}</div>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <label for="department" class="form-label">Department</label>
+                <input type="text" class="form-control {% if errors.department %}is-invalid{% endif %}" 
+                       id="department" name="department" value="{{ employee.department|default:'' }}" required>
+                {% if errors.department %}
+                    <div class="invalid-feedback">{{ errors.department }}</div>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <label for="employee_id" class="form-label">Employee ID</label>
+                <input type="text" class="form-control" id="employee_id" name="employee_id" 
+                       value="{{ employee.employee_id|default:'' }}">
+            </div>
+        </div>
+
+        <div class="row g-3 mt-2">
+            <div class="col-md-6">
+                <label for="date_of_joining" class="form-label">Date of Joining</label>
+                <input type="date" class="form-control {% if errors.date_of_joining %}is-invalid{% endif %}" 
+                       id="date_of_joining" name="date_of_joining" 
+                       value="{{ employee.date_of_joining|date:'Y-m-d'|default:'' }}" required>
+                {% if errors.date_of_joining %}
+                    <div class="invalid-feedback">{{ errors.date_of_joining }}</div>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <label for="work_location" class="form-label">Work Location</label>
+                <input type="text" class="form-control {% if errors.work_location %}is-invalid{% endif %}" 
+                       id="work_location" name="work_location" value="{{ employee.work_location|default:'' }}" required>
+                {% if errors.work_location %}
+                    <div class="invalid-feedback">{{ errors.work_location }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <button type="submit" class="btn btn-primary">Save Employee</button>
+            <a href="{% url 'employee-list' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

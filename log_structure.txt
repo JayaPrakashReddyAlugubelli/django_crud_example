@@ -1,0 +1,13 @@
+Required Log Directory Structure:
+
+logs/
+├── employees/          # Employee-related logs
+│   ├── employee_api.log
+│   └── employee_error.log
+├── tasks/             # Task-related logs
+│   ├── task_api.log
+│   └── task_error.log
+└── general/           # General application logs
+    └── django.log
+
+Create these directories and ensure proper write permissions before running the application.

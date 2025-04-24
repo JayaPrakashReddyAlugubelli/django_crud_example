@@ -83,6 +83,33 @@ pytest employees/tests/test_views.py -v
    - Configure log rotation if needed
    - Monitor log files for issues and performance
 
+## Docker Deployment
+You can run this application using Docker:
+
+1. Build and run using docker-compose:
+```bash
+docker-compose up --build
+```
+
+2. Access the application at http://localhost:8000
+
+3. To run in detached mode:
+```bash
+docker-compose up -d
+```
+
+4. To stop the containers:
+```bash
+docker-compose down
+```
+
+5. To view logs:
+```bash
+docker-compose logs -f
+```
+
+Note: The logs will be persisted in the `logs` directory on your host machine through volume mounting.
+
 ## Security Features
 - CSRF protection enabled
 - Form validation and sanitization

@@ -1,121 +1,95 @@
-# Django CRUD Example
+# Django CRUD Example with React Frontend
 
-A comprehensive Django application demonstrating CRUD operations with task and employee management, featuring a robust logging system.
-
-## Features
-
-### Task Management
-- List all tasks
-- Create new tasks
-- Update existing tasks
-- Delete tasks
-- Mark tasks as completed
-- Bootstrap-based responsive UI
-
-### Employee Management
-- List all employees
-- Register new employees
-- Update employee information
-- Delete employee records
-- Validation for email and phone number formats
-- Comprehensive employee details (personal info, job details)
-
-### Logging System
-- Separate log files for tasks and employees APIs
-- Request/response logging with timing information
-- Detailed error logging with stack traces
-- Organized log directory structure
-- Log rotation and management
-- Performance monitoring
-
-## Installation
-1. Clone the repository:
-```bash
-git clone https://github.com/JayaPrakashReddyAlugubelli/django_crud_example.git
-cd django_crud_example
-```
-
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-3. Run migrations:
-```bash
-python manage.py migrate
-```
-
-4. Run the development server:
-```bash
-python manage.py runserver
-```
-
-5. Visit http://127.0.0.1:8000 in your browser
+This project is a full-stack application with a Django REST API backend and React frontend for managing employees and tasks.
 
 ## Project Structure
+
 ```
 django_crud_example/
-├── core/                   # Project settings and configuration
-├── tasks/                  # Task management app
-├── employees/              # Employee management app
-└── logs/                   # Application logs
-    ├── tasks/             # Task-specific logs
-    ├── employees/         # Employee-specific logs
-    └── general/           # General application logs
+├── backend/             # Django REST API
+│   ├── core/           # Django project settings
+│   ├── employees/      # Employees app
+│   ├── tasks/          # Tasks app
+│   ├── manage.py       # Django management script
+│   ├── requirements.txt # Python dependencies
+│   └── Dockerfile      # Backend Docker configuration
+└── frontend/           # React frontend (to be created)
 ```
 
-## Running Tests
-To run the tests:
+## Backend (Django REST API)
+
+### API Endpoints
+
+1. Employees API:
+   - GET /api/employees/ - List all employees
+   - POST /api/employees/ - Create new employee
+   - GET /api/employees/{id}/ - Get employee details
+   - PUT /api/employees/{id}/ - Update employee
+   - DELETE /api/employees/{id}/ - Delete employee
+
+2. Tasks API:
+   - GET /api/tasks/ - List all tasks
+   - POST /api/tasks/ - Create new task
+   - GET /api/tasks/{id}/ - Get task details
+   - PUT /api/tasks/{id}/ - Update task
+   - DELETE /api/tasks/{id}/ - Delete task
+
+### Setup and Installation
+
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Run migrations:
+   ```bash
+   python manage.py migrate
+   ```
+
+4. Start the development server:
+   ```bash
+   python manage.py runserver
+   ```
+
+### Docker Deployment
+
+1. Build the Docker image:
+   ```bash
+   cd backend
+   docker build -t django-crud-api .
+   ```
+
+2. Run with Docker Compose:
+   ```bash
+   docker-compose up
+   ```
+
+## Frontend (React)
+
+Coming soon...
+
+## Development
+
+- Python 3.8+
+- Django 4.2
+- Django REST Framework 3.14
+- React (upcoming)
+
+## Testing
+
+Run the test suite:
 ```bash
-pytest tasks/tests/test_views.py -v
-pytest employees/tests/test_views.py -v
+cd backend
+pytest
 ```
 
-## Production Deployment
-1. Set the following environment variables:
-   - DJANGO_SECRET_KEY
-   - DJANGO_SETTINGS_MODULE=core.settings_prod
+## Logging
 
-2. Update ALLOWED_HOSTS in settings_prod.py with your domain
-
-3. Configure logging paths in production:
-   - Ensure log directories exist and have proper permissions
-   - Configure log rotation if needed
-   - Monitor log files for issues and performance
-
-## Docker Deployment
-You can run this application using Docker:
-
-1. Build and run using docker-compose:
-```bash
-docker-compose up --build
-```
-
-2. Access the application at http://localhost:8000
-
-3. To run in detached mode:
-```bash
-docker-compose up -d
-```
-
-4. To stop the containers:
-```bash
-docker-compose down
-```
-
-5. To view logs:
-```bash
-docker-compose logs -f
-```
-
-Note: The logs will be persisted in the `logs` directory on your host machine through volume mounting.
-
-## Security Features
-- CSRF protection enabled
-- Form validation and sanitization
-- Secure password handling
-- Production settings separation
-- Sensitive data filtering in logs
-
-## License
-MIT License
+The application includes comprehensive logging for both APIs:
+- Employee API logs in `logs/employees.log`
+- Task API logs in `logs/tasks.log`
